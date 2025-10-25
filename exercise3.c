@@ -7,6 +7,8 @@
  */
 
 #include "exercise3.h"
+#include <assert.h>
+#include <string.h>
 
 /* 
  * Initialize an empty queue
@@ -15,7 +17,12 @@
  * Post-condition: queue is empty with front and rear set to NULL
  */
 void initialize(queue *q) {
-    /* TODO: Initialize the queue */
+    memset(q, 0, sizeof(queue)); 
+    /*
+    Will ensure even if there are more fields 
+    added they are set to zero equivalent for 
+    data type
+    */
 }
 
 /* 
@@ -27,7 +34,25 @@ void initialize(queue *q) {
  * Post-condition: x is added to the rear of the queue
  */
 void enqueue(queue *q, int x) {
-    /* TODO: Implement enqueue */
+   
+    node* n1 = malloc(sizeof(node));
+    if (n1 == NULL) {printf("Memory allocation failed\n"); return;}
+
+    n1->data = x;
+    n1->next = NULL;
+    if (q->count == 0)
+    {
+        q->front = n1;
+        q->rear = n1;
+        
+    }else{
+        q->rear->next = n1;
+        q->rear = n1;
+    }
+    
+    q->count++;
+    assert(q->rear->data == x);
+    return;
 }
 
 /* 
@@ -38,8 +63,15 @@ void enqueue(queue *q, int x) {
  * Post-condition: front item is removed and returned
  */
 int dequeue(queue *q) {
-    /* TODO: Implement dequeue */
-    return 0;  
+    if (empty(q)) {printf("failed to dequeue, queue empty, returned 0\n"); return 0;}
+    
+    int val = q->front->data;
+    node* garb = q->front;
+    q->front = q->front->next;
+    free(garb);
+    q->count--;
+
+    return val;  
 }
 
 /* 
@@ -48,7 +80,8 @@ int dequeue(queue *q) {
  * Returns: true if queue is empty, false otherwise
  */
 bool empty(const queue *q) {
-    /* TODO: Implement empty check */
+    if (q->count == 0){return true;}
+    
     return false; 
 }
 
@@ -59,6 +92,8 @@ bool empty(const queue *q) {
  */
 bool full(const queue *q) {
     /* TODO: Implement full check */
+    if (0 == 1) {return true;}
+    
     return false;
 }
 

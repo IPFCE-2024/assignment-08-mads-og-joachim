@@ -63,6 +63,8 @@ bool full(stack *s) {
  * Post-condition: both stacks in the queue are empty
  */
 void init_queue(queue *q) {
+    initialize(&q->s1);
+    initialize(&q->s2);
     /* TODO: initialize queue */
 }
 
@@ -72,6 +74,7 @@ void init_queue(queue *q) {
  * x: item to be inserted
  */
 void enqueue(queue *q, int x) {
+    push(&q->s1,x);
     /* TODO: Implement enqueue using ONLY stack operations */
 }
 
@@ -80,9 +83,13 @@ void enqueue(queue *q, int x) {
  * q: pointer to the queue structure
  */
 int dequeue(queue *q) {
-    /* TODO: Implement dequeue using ONLY stack operations */
-    
-    return 0;  // TODO: Replace with actual implementation
+    if (queue_empty(q)) {printf("failed to dequeue, queue is empty, returning 0"); return 0;}
+
+    while (!empty(&q->s1)) {push(&q->s2,pop(&q->s1));} // Reverse order to give access to back of queue
+    int val = pop(&q->s2); // Takes the former front of queue
+    while (!empty(&q->s2)) {push(&q->s1,pop(&q->s2));} // Reverse order to original order with missing element from front
+
+    return val;  
 }
 
 /* 
@@ -91,15 +98,13 @@ int dequeue(queue *q) {
  * Returns: true if both stacks are empty, false otherwise
  */
 bool queue_empty(queue *q) {
-    /* TODO: Implement using ONLY stack operations */
-    return false;  // TODO: Replace with actual implementation
+    return empty(&q->s1);  
 }
 
 /* 
 * Check if the queue is full
 */
 bool queue_full(queue *q) {
-    /* TODO: Implement using ONLY stack operations */
     return false;
 }
 
