@@ -83,7 +83,7 @@ void enqueue(queue *q, int x) {
  * q: pointer to the queue structure
  */
 int dequeue(queue *q) {
-    if (queue_empty(q)) {printf("failed to dequeue, queue is empty, returning 0"); return 0;}
+    if (queue_empty(q)) {printf("failed to dequeue, queue is empty, returning -1"); return -1;}
 
     while (!empty(&q->s1)) {push(&q->s2,pop(&q->s1));} // Reverse order to give access to back of queue
     int val = pop(&q->s2); // Takes the former front of queue

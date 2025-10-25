@@ -63,7 +63,7 @@ void enqueue(queue *q, int x) {
  * Post-condition: front item is removed and returned
  */
 int dequeue(queue *q) {
-    if (empty(q)) {printf("failed to dequeue, queue empty, returned 0\n"); return 0;}
+    if (empty(q)) {printf("failed to dequeue, queue empty, returned -1\n"); return -1;}
     
     int val = q->front->data;
     node* garb = q->front;

@@ -33,23 +33,21 @@ node* isort(node* list) {
 
         In this implementation we will go from the bottom of the list which makes 
         sense since we make a sepparate sorted list. It also doesn't create new
-        nodes so it is an in place implementation
+        nodes so it is an in-place implementation
         */
 
-        // Insert curr into sorted list at correct position
         if (sorted == NULL || curr->data < sorted->data) { 
             curr->next = sorted; // Linkes node to sorted list
             sorted = curr;  // Sets head of sorted list
         } else {
             node* temp = sorted;
-            while (temp->next != NULL && temp->next->data < curr->data)
-                {temp = temp->next;} // Goes through sorted list till the current node data is smaller than next node data
+            while (temp->next != NULL && temp->next->data < curr->data) {temp = temp->next;} 
+            // Goes through sorted list till the current node data is smaller than next node data
 
             curr->next = temp->next; // Inserts node and relinks list
             temp->next = curr;
         }
     }
-
     return sorted;
 }
 
