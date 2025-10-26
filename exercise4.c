@@ -85,9 +85,14 @@ void enqueue(queue *q, int x) {
 int dequeue(queue *q) {
     if (queue_empty(q)) {printf("failed to dequeue, queue is empty, returning -1"); return -1;}
 
-    while (!empty(&q->s1)) {push(&q->s2,pop(&q->s1));} // Reverse order to give access to back of queue
-    int val = pop(&q->s2); // Takes the former front of queue
-    while (!empty(&q->s2)) {push(&q->s1,pop(&q->s2));} // Reverse order to original order with missing element from front
+    while (!empty(&q->s1)) {push(&q->s2,pop(&q->s1));} 
+    // Reverse order to give access to back of queue
+    
+    int val = pop(&q->s2); 
+    // Takes the former rear of queue
+
+    while (!empty(&q->s2)) {push(&q->s1,pop(&q->s2));} 
+    // Reverse order to original order with missing element from rear
 
     return val;  
 }

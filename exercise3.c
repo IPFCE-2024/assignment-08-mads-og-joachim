@@ -80,9 +80,7 @@ int dequeue(queue *q) {
  * Returns: true if queue is empty, false otherwise
  */
 bool empty(const queue *q) {
-    if (q->count == 0){return true;}
-    
-    return false; 
+    return (q->count == 0); 
 }
 
 /* 
@@ -91,10 +89,7 @@ bool empty(const queue *q) {
  * Returns: true if queue is full, false otherwise
  */
 bool full(const queue *q) {
-    /* TODO: Implement full check */
-    if (0 == 1) {return true;}
-    
-    return false;
+    return (0 == 1);
 }
 
 /* Helper function to print the queue */
